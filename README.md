@@ -1,15 +1,15 @@
 <center>
-<h1>ANCHT BOT</h1>
-<br><br>
 <img src="./src/media/screenshot/ss.png">
 <p align="center">
+<h1>ANCHT BOT</h1>
+<br><br>
 <a href="https://github.com/MRHRTZ"><img title="Author" src="https://img.shields.io/badge/Author-MRHRTZ-red.svg?style=for-the-badge&logo=github"></a>
 </p>
-<p align="center">
+<!-- <p align="center">
 <a href="https://github.com/MRHRTZ/Anon-Chat/network/members"><img title="Forks" src="https://img.shields.io/github/forks/MRHRTZ/Anon-Chat?color=red&style=flat-square"></a>
 <a href="https://github.com/MRHRTZ/Anon-Chat/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/MRHRTZ/Anon-Chat?label=Watchers&color=blue&style=flat-square"></a>
 <a href="https://github.com/MRHRTZ/Anon-Chat"><img title="Followers" src="https://img.shields.io/github/followers/MRHRTZ?color=blue&style=flat-square"></a>
-<a href="https://github.com/MRHRTZ/Anon-Chat/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/MRHRTZ/Anon-Chat?color=red&style=flat-square"></a>
+<a href="https://github.com/MRHRTZ/Anon-Chat/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/MRHRTZ/Anon-Chat?color=red&style=flat-square"></a> -->
 </center>
 
 ## Installation
