@@ -29,5 +29,5 @@
 - <a href="https://wa.me/6285559038021">WhatsApp</a>
 - <a href="https://www.instagram.com/hanif_az.sq.61">Instagram</a>
 
-# Bot demo
+# Wan't to try bot?
 - <a href="https://wa.me/4738994076?text=/menu">Type menu with prefix</a>
