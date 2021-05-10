@@ -8,8 +8,8 @@
 - Run ( npm start )
 
 ## Note
-- You can change sessions or owner at src/settings.json
-- For different session you can type ( node . yoursessionname )
+- You can change sessions and owner at src/settings.json
+- For different session you must change session name at settings 
 
 ## Contact Me
 - <a href="https://wa.me/6285559038021">WhatsApp</a>
