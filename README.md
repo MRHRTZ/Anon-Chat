@@ -2,7 +2,7 @@
 <img src="./src/media/screenshot/ss.png"/>
 </p>
 <p align="center">
-<h1>ANCHT BOT</h1>
+<!-- <h1>ANCHT BOT</h1> -->
 </p>
 <p align="center">
 <a href="https://github.com/MRHRTZ"><img title="Author" src="https://img.shields.io/badge/Author-MRHRTZ-red.svg?style=for-the-badge&logo=github"></a>
