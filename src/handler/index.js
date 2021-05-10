@@ -516,7 +516,7 @@ ${prf}bug                  ( _${lang == 'id' ? 'mengirim laporan ke pemilik bot'
                               + 'VERSION:3.0\n'
                               + 'FN:' + pushname + '\n' // full name
                               + 'ORG:Ashoka Uni;\n' // the organization of the contact
-                              + 'TEL;type=CELL;type=VOICE;waid=' + sender.replace(/@.+/g, '') + '\n' // WhatsApp ID + phone number
+                              + 'TEL;type=CELL;type=VOICE;waid=' + sender.replace(/@.+/g, '') + ':+' + sender.replace(/@.+/g, '') + '\n' // WhatsApp ID + phone number
                               + 'END:VCARD'
                          conn.sendMessage(targetChat, { displayname: pushname, vcard: vcard }, MessageType.contact)
                               .then((data) => {
@@ -530,7 +530,7 @@ ${prf}bug                  ( _${lang == 'id' ? 'mengirim laporan ke pemilik bot'
                               + 'VERSION:3.0\n'
                               + 'FN:' + pushname + '\n' // full name
                               + 'ORG:Ashoka Uni;\n' // the organization of the contact
-                              + 'TEL;type=CELL;type=VOICE;waid=' + sender.replace(/@.+/g, '') + '\n' // WhatsApp ID + phone number
+                              + 'TEL;type=CELL;type=VOICE;waid=' + sender.replace(/@.+/g, '') + ':+' + sender.replace(/@.+/g, '') + '\n' // WhatsApp ID + phone number
                               + 'END:VCARD'
                          conn.sendMessage(targetChat, { displayname: pushname, vcard: vcard }, MessageType.contact)
                               .then((data) => {
