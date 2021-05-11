@@ -253,7 +253,9 @@ ${prf}author _[ ${lang == 'id' ? 'kirim kontak pembuat bot' : 'send the bot crea
                          + 'VERSION:3.0\n'
                          + 'FN:' + 'Owner bot' + '\n' // full name
                          + 'ORG:Ashoka Uni;\n' // the organization of the contact
-                         + 'TEL;type=CELL;type=VOICE;waid=' + settings.Owner + ':+' + settings.Owner + '\n' // WhatsApp ID + phone number
+                         + 'TEL;type=CELL;type=VOICE;waid=' + settings.Owner.replace(/@s.whatsapp.net/,'') + 
+':+' + 
+settings.Owner.replace(/@s.whatsapp.net/,'') + '\n' // WhatsApp ID + phone number
                          + 'END:VCARD'
                     conn.sendMessage(from, { displayname: 'Owner bot', vcard: vcard1 }, MessageType.contact, { quoted: hurtz })
                     break
