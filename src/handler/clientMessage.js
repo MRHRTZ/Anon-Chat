@@ -110,9 +110,9 @@ module.exports = handle = async (
                     const buff = await conn.downloadMediaMessage(mediaData)
                     conn.sendMessage(targetChat, buff, MessageType.image, { caption: body ? body : '' })
                } else if (type == 'audioMessage') {
-                    if (mediaData.message.stickerMessage.contextInfo) {
+                    if (mediaData.message.audioMessage.contextInfo) {
                          const buff = await conn.downloadMediaMessage(mediaData)
-                         conn.sendMessage(targetChat, buff, MessageType.sticker, { quoted: { message: mediaData.message.stickerMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
+                         conn.sendMessage(targetChat, buff, MessageType.audio, { quoted: { message: mediaData.message.audioMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
                          return
                     }
                     const buff = await conn.downloadMediaMessage(mediaData)
@@ -193,9 +193,9 @@ module.exports = handle = async (
                     const buff = await conn.downloadMediaMessage(mediaData)
                     conn.sendMessage(targetChat, buff, MessageType.image, { caption: body ? body : '' })
                } else if (type == 'audioMessage') {
-                    if (mediaData.message.stickerMessage.contextInfo) {
+                    if (mediaData.message.audioMessage.contextInfo) {
                          const buff = await conn.downloadMediaMessage(mediaData)
-                         conn.sendMessage(targetChat, buff, MessageType.sticker, { quoted: { message: mediaData.message.stickerMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
+                         conn.sendMessage(targetChat, buff, MessageType.audio, { quoted: { message: mediaData.message.audioMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
                          return
                     }
                     const buff = await conn.downloadMediaMessage(mediaData)
