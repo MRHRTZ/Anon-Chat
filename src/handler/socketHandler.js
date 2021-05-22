@@ -7,7 +7,6 @@ var moment = require('moment')
 var { exec } = require('child_process')
 var util = require('util');
 const { MessageType } = require('@adiwajshing/baileys');
-var delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 // const time = moment(new Date()).format('HH:mm:ss DD/MM/YYYY')
 
 let client_log = []

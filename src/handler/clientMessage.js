@@ -85,7 +85,7 @@ module.exports = handle = async (
                const targetChat = db_user[indexSender].client2
                if (targetChat == null) return
                if (commandList.includes(body.slice(1))) return
-               const teks = chalk.bgMagentaBright('[ ANCHT ]') + '  ' + time + ' ' + chalk.greenBright(body) + " dari " + chalk.greenBright(pushname.split('\n')[0])
+               const teks = chalk.bgCyanBright('[ ANCHT ]') + '  ' + time + ' ' + chalk.greenBright(body) + " dari " + chalk.greenBright(pushname.split('\n')[0])
                console.log(teks);
                clientsNow.forEach((client) => {
                     if (!isClientLog) return
@@ -153,22 +153,26 @@ module.exports = handle = async (
                     conn.sendMessage(targetChat, buff, 'documentMessage', { mimetype: mediaData.message.documentMessage.mimetype, filename: mediaData.message.documentMessage.title })
                } else if (type == 'productMessage') {
                     if (mediaData.message.stickerMessage.contextInfo) {
-                         const buff = await conn.downloadMediaMessage(mediaData)
-                         conn.sendMessage(targetChat, buff, MessageType.sticker, { quoted: { message: mediaData.message.stickerMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
+                         conn.sendMessage(targetChat, mediaData.message.productMessage, 'productMessage', { quoted: { message: mediaData.message.productMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
                          return
                     }
-                    // console.log(mediaData);
+                    conn.sendMessage(targetChat, mediaData.message.productMessage, 'productMessage')
                } else if (type == 'contactsArrayMessage') {
-                    conn.sendMessage(targetChat, `Mohon kirim kontak satu persatu!`, MessageType.text)
+                    if (mediaData.message.contactsArrayMessage.contextInfo) {
+                         conn.sendMessage(targetChat, mediaData.message.contactsArrayMessage, 'contactsArrayMessage', { quoted: { message: mediaData.message.contactsArrayMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
+                         return
+                    }
+                    conn.sendMessage(targetChat, mediaData.message.contactsArrayMessage, 'contactsArrayMessage')
                } else if (type === 'extendedTextMessage') {
-                    conn.sendMessage(targetChat, body, MessageType.text, { quoted: { ...mediaData, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
+                    let quoted = hurtz.message.extendedTextMessage.contextInfo ? mediaData : {}
+                    conn.sendMessage(targetChat, body, MessageType.text, { quoted: { ...quoted, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
                }
           } else if (user2.includes(sender)) {
                const indexSender = db_user.findIndex(i => i.client2 == sender)
                const targetChat = db_user[indexSender].client1
                if (targetChat == null) return
                if (commandList.includes(body.slice(1))) return
-               const teks = chalk.bgMagentaBright('[ ANCHT ]') + '  ' + time + ' ' + chalk.greenBright(body) + " dari " + chalk.greenBright(pushname.split('\n')[0])
+               const teks = chalk.bgCyanBright('[ ANCHT ]') + '  ' + time + ' ' + chalk.greenBright(body) + " dari " + chalk.greenBright(pushname.split('\n')[0])
                console.log(teks);
                clientsNow.forEach((client) => {
                     if (!isClientLog) return
@@ -236,15 +240,19 @@ module.exports = handle = async (
                     conn.sendMessage(targetChat, buff, 'documentMessage', { mimetype: mediaData.message.documentMessage.mimetype, filename: mediaData.message.documentMessage.title })
                } else if (type == 'productMessage') {
                     if (mediaData.message.stickerMessage.contextInfo) {
-                         const buff = await conn.downloadMediaMessage(mediaData)
-                         conn.sendMessage(targetChat, buff, MessageType.sticker, { quoted: { message: mediaData.message.stickerMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
+                         conn.sendMessage(targetChat, mediaData.message.productMessage, 'productMessage', { quoted: { message: mediaData.message.productMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
                          return
                     }
-                    // console.log(mediaData);
+                    conn.sendMessage(targetChat, mediaData.message.productMessage, 'productMessage')
                } else if (type == 'contactsArrayMessage') {
-                    conn.sendMessage(targetChat, `Mohon kirim kontak satu persatu!`, MessageType.text)
+                    if (mediaData.message.contactsArrayMessage.contextInfo) {
+                         conn.sendMessage(targetChat, mediaData.message.contactsArrayMessage, 'contactsArrayMessage', { quoted: { message: mediaData.message.contactsArrayMessage.contextInfo.quotedMessage, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
+                         return
+                    }
+                    conn.sendMessage(targetChat, mediaData.message.contactsArrayMessage, 'contactsArrayMessage')
                } else if (type === 'extendedTextMessage') {
-                    conn.sendMessage(targetChat, body, MessageType.text, { quoted: { ...mediaData, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
+                    let quoted = hurtz.message.extendedTextMessage.contextInfo ? mediaData : {}
+                    conn.sendMessage(targetChat, body, MessageType.text, { quoted: { ...quoted, key: { fromMe: true, credit: 'AnonChat By MRHRTZ' } } })
                }
           }
 
