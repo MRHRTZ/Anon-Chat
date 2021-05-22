@@ -73,9 +73,50 @@ module.exports = handle = async (
           const listed_sender = [...sender_lang.id, ...sender_lang.en]
           const lang = listed_sender.includes(sender) ? sender_lang.en.includes(sender) ? 'en' : 'id' : 'id'
 
+          if (body) {
+               let bc = JSON.parse(fs.readFileSync('./src/database/client-log.json'))
+               if (bc.status && isOwner) {
+                    if (body.toLowerCase() == 'y') {
+                         balas(from, lang == 'id' ? 'Akses diterima..' : 'Access accepted..')
+                         if (bc.media != null) {
+                              for (let i = 0;i < bc.users.length;i++) {
+                                   conn.sendMessage(bc.users[i], bc.media, MessageType.image, { caption: bc.text })
+                                   if (i === bc.users.length - 1) {
+                                        balasNp(from, lang == 'id' ? `Broadcast sukses ✅` : `Broadcast success ✅`)
+                                        bc.status = false
+                                        bc.users = []
+                                        bc.media = null
+                                        bc.text = ""
+                                        fs.writeFileSync('./src/database/client-log.json', JSON.stringify(bc, null, 5))
+                                   }
+                              }
+                         } else {
+                              for (let i = 0;i < bc.users.length;i++) {
+                                   conn.sendMessage(bc.users[i], bc.text, MessageType.text)
+                                   if (i === bc.users.length - 1) {
+                                        balasNp(from, lang == 'id' ? `Broadcast sukses ✅` : `Broadcast success ✅`)
+                                        bc.status = false
+                                        bc.users = []
+                                        bc.media = null
+                                        bc.text = ""
+                                        fs.writeFileSync('./src/database/client-log.json', JSON.stringify(bc, null, 5))
+                                   }
+                              }
+                         }
+                    } else if (body.toLowerCase() == 'n') {
+                         balas(from, lang == 'id' ? 'Broadcast berhasil dibatalkan ❌' : 'Broadcast canceled successfully ❌')
+                         bc.status = false
+                         bc.users = []
+                         bc.media = null
+                         bc.text = ""
+                         fs.writeFileSync('./src/database/client-log.json', JSON.stringify(bc, null, 5))
+                    }
+               }
+          }
           /*-----------------------[ Handler ]---------------------*/
 
           if (hurtz.key.fromMe) return // This is not a selfbot
+          if (from.includes('@g.us')) return // Private Chat only
 
           switch (cmd) {
                case prf + 'help':
@@ -91,6 +132,7 @@ module.exports = handle = async (
 ⚠️ ${prf}bug - _${lang == 'id' ? 'mengirim laporan ke pemilik bot' : 'send a report to the bot owner'}_
 🔮 ${prf}owner - _${lang == 'id' ? 'kirim kontak pemilik bot' : 'send the bot owner contact'}_
 👑 ${prf}author - _${lang == 'id' ? 'kirim kontak pembuat bot' : 'send the bot creator contact'}_
+${isOwner ? `📢 ${prf}broadcast ` + (lang == 'id' ? `<Pesanmu> _Kirim broadcast ke semua kontak_` : `<your message> _Send broadcast to all contacts_`) : ''}
 
 ———————————————————————————
 
@@ -243,6 +285,46 @@ module.exports = handle = async (
                          settings.Owner.replace(/@s.whatsapp.net/, '') + '\n' // WhatsApp ID + phone number
                          + 'END:VCARD'
                     conn.sendMessage(from, { displayname: 'Owner bot', vcard: vcard1 }, MessageType.contact, { quoted: hurtz })
+                    break
+               case prf + 'broadcast':
+                    if (isOwner) {
+                         if (args.length == 1) return balas(from, lang == 'id' ? `Penggunaan : *${prf}broadcast* <Pesanmu>` : `Usage : *${prf}broadcast* <your message>`)
+                         let bc = JSON.parse(fs.readFileSync('./src/database/client-log.json'))
+                         const all_chat = conn.chats.dict
+                         const all_data = Object.keys(all_chat)
+                         let contactsOnly = all_data.filter((data) => data.includes('@s.whatsapp.net'))
+                         const myMessage = args.slice(1).join(' ')
+                         if (!bc.status) {
+                              if (isImageMsg || isQuotedImage) {
+                                   const buffer = await conn.downloadMediaMessage(mediaData)
+                                   bc.status = true
+                                   for (let data of contactsOnly) {
+                                        bc.users.push(data)
+                                        // conn.sendMessage(data, buffer, MessageType.image, { caption: myMessage })
+                                   }
+                                   bc.media = buffer
+                                   bc.text = myMessage
+                                   fs.writeFileSync('./src/database/client-log.json', JSON.stringify(bc, null, 5))
+                                   balas(from, lang == 'id' ? `Kamu yakin akan mengirim broadcast gambar dengan pesan *${myMessage}*? ketik *Y/N*` : `Are you sure you want to send broadcast image with the message *${myMessage}*? type *Y/N*`)
+                                   // balas(from, util.format(contactsOnly))
+                              } else {
+                                   bc.status = true
+                                   for (let data of contactsOnly) {
+                                        bc.users.push(data)
+                                        // conn.sendMessage(data, buffer, MessageType.image, { caption: myMessage })
+                                   }
+                                   bc.text = myMessage
+                                   fs.writeFileSync('./src/database/client-log.json', JSON.stringify(bc, null, 5))
+                                   balas(from, lang == 'id' ? `Kamu yakin akan mengirim broadcast dengan pesan *${myMessage}*? ketik *Y/N*` : `Are you sure you want to send broadcast with the message *${myMessage}*? type *Y/N*`)
+                                   // balas(from, util.format(contactsOnly))
+
+                              }
+                         } else {
+                              balas(from, lang == 'id' ? `Mohon tunggu sampai proses broadcast selesai ❌` : `Please wait for the broadcast process until finish ❌`)
+                         }
+                    } else {
+                         balas(from, lang == 'id' ? 'Hanya untuk owner bot' : 'For owner bot only ❌')
+                    }
                     break
                default:
                     break
