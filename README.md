@@ -26,5 +26,5 @@
 - For different session you must change session name at settings 
 
 ## Contact Me
-- <a href="https://wa.me/6285559038021">WhatsApp</a>
+- <a href="https://wa.me/79581331547?text=Hi">WhatsApp</a>
 - <a href="https://www.instagram.com/hanif_az.sq.61">Instagram</a>
