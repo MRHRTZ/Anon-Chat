@@ -373,7 +373,7 @@ module.exports = handle = async (
 
         /*-----------------------[ Handler ]---------------------*/
 
-        // if (hurtz.key.fromMe) return // This is not a selfbot
+        if (hurtz.key.fromMe) return // This is not a selfbot
         if (from.includes('@g.us')) return // Private Chat only
 
         switch (cmd) {
